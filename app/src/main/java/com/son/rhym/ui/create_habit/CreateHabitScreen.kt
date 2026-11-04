@@ -17,13 +17,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.son.rhym.ui.create_habit.components.DateEndSection
-import com.son.rhym.ui.create_habit.components.DateStartSection
+import com.son.rhym.ui.create_habit.components.CreateHabitHeader
+import com.son.rhym.ui.create_habit.components.EndDateSection
 import com.son.rhym.ui.create_habit.components.GoalSection
 import com.son.rhym.ui.create_habit.components.HabitNameSection
-import com.son.rhym.ui.create_habit.components.HeaderCreateHabit
-import com.son.rhym.ui.create_habit.components.RemindSection
+import com.son.rhym.ui.create_habit.components.ReminderSection
 import com.son.rhym.ui.create_habit.components.RepeatSection
+import com.son.rhym.ui.create_habit.components.StartDateSection
 import com.son.rhym.ui.home.components.BottomNavigationBar
 
 @Composable
@@ -52,7 +52,7 @@ fun CreateHabitScreen(
                     .verticalScroll(scrollState)
                     .padding(horizontal = 10.dp, vertical = 10.dp)
             ) {
-                HeaderCreateHabit()
+                CreateHabitHeader()
 
                 HabitNameSection(
                     habitName = habitName,
@@ -60,12 +60,12 @@ fun CreateHabitScreen(
                 )
                 GoalSection()
                 RepeatSection()
-                RemindSection()
+                ReminderSection()
 
                 Spacer(modifier = Modifier.height(16.dp))
 
-                DateStartSection()
-                DateEndSection()
+                StartDateSection()
+                EndDateSection()
 
             }
         }

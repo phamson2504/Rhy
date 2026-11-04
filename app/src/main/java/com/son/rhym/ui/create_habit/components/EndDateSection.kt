@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.sp
 import com.son.rhym.R
 
 @Composable
-fun DateEndSection() {
+fun EndDateSection() {
     Card(
         shape = RoundedCornerShape(16.dp),
         border = BorderStroke(

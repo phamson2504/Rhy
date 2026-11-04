@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.sp
 import com.son.rhym.R
 
 @Composable
-fun HeaderCreateHabit(
+fun CreateHabitHeader(
     modifier: Modifier = Modifier
 ) {
     Row(
