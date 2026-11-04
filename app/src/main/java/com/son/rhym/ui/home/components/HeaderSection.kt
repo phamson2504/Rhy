@@ -1,4 +1,4 @@
-package com.son.rhym.components.home
+package com.son.rhym.ui.home.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row
@@ -21,12 +21,8 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
-
 @Composable
 fun HeaderSection(
-//    onMenuClick: () -> Unit,
-//    onFilterClick: () -> Unit,
-//    onCalendarClick: () -> Unit
 ) {
     val currentDate = LocalDate.now()
 
@@ -49,7 +45,6 @@ fun HeaderSection(
                     MaterialTheme.colorScheme.onBackground
                 )
             )
-
 
             Spacer(Modifier.width(8.dp))
 

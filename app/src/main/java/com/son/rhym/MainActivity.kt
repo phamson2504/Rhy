@@ -9,8 +9,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.son.rhym.ui.CreateHabitScreen
-import com.son.rhym.ui.RhymHomeScreen
+import com.son.rhym.ui.create_habit.CreateHabitScreen
+import com.son.rhym.ui.home.RhymHomeScreen
 import com.son.rhym.ui.theme.RhymTheme
 
 class MainActivity : ComponentActivity() {

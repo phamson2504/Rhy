@@ -1,4 +1,4 @@
-package com.son.rhym.components.create_habit
+package com.son.rhym.ui.create_habit.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -25,8 +25,7 @@ import androidx.compose.ui.unit.sp
 import com.son.rhym.R
 
 @Composable
-fun GoalSection(
-) {
+fun GoalSection() {
     Column(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         modifier = Modifier.padding(top = 18.dp)

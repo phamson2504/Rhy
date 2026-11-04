@@ -1,4 +1,4 @@
-package com.son.rhym.components.home
+package com.son.rhym.ui.home.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas

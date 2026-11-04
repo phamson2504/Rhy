@@ -1,4 +1,4 @@
-package com.son.rhym.ui
+package com.son.rhym.ui.home
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,14 +19,14 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.son.rhym.components.home.BottomNavigationBar
-import com.son.rhym.components.home.DailyProgressCard
-import com.son.rhym.components.home.HabitBottomSheet
-import com.son.rhym.components.home.HabitsHeader
-import com.son.rhym.components.home.HeaderSection
-import com.son.rhym.components.home.WeeklyCalendarSection
 import com.son.rhym.model.HabitItem
-import com.son.rhym.swipeable.SwipeActionContainer
+import com.son.rhym.ui.common.swipeable.SwipeActionContainer
+import com.son.rhym.ui.home.components.BottomNavigationBar
+import com.son.rhym.ui.home.components.DailyProgressCard
+import com.son.rhym.ui.home.components.HabitBottomSheet
+import com.son.rhym.ui.home.components.HabitsHeader
+import com.son.rhym.ui.home.components.HeaderSection
+import com.son.rhym.ui.home.components.WeeklyCalendarSection
 import com.son.rhym.ui.theme.AccentGreen
 import com.son.rhym.ui.theme.AccentOrange
 import com.son.rhym.ui.theme.AccentPurple

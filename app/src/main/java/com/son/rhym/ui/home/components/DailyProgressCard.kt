@@ -1,4 +1,4 @@
-package com.son.rhym.components.home
+package com.son.rhym.ui.home.components
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column

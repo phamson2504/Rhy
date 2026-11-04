@@ -1,4 +1,4 @@
-package com.son.rhym.components.create_habit
+package com.son.rhym.ui.create_habit.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.sp
 import com.son.rhym.R
 
 @Composable
-fun DateEndSection() {
+fun DateStartSection() {
     Card(
         shape = RoundedCornerShape(16.dp),
         border = BorderStroke(
@@ -54,36 +54,33 @@ fun DateEndSection() {
             ) {
                 Image(
                     painter = painterResource(R.drawable.ic_calendar),
-                    contentDescription = "End Date",
+                    contentDescription = "Start Date",
                     modifier = Modifier.size(24.dp),
                     colorFilter = ColorFilter.tint(
                         MaterialTheme.colorScheme.onBackground
                     )
                 )
-
                 Column {
                     Text(
-                        text = "End",
+                        text = "Start from",
                         fontSize = 15.sp,
                         fontWeight = FontWeight.Medium
                     )
                     Text(
-                        text = "Keep it going",
+                        text = "When this habit begins",
                         fontSize = 12.sp,
                         color = Color.Gray
                     )
                 }
             }
 
-
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
-                    text = "Never",
+                    text = "Today",
                     fontSize = 14.sp,
                     color = Color.Gray,
                     modifier = Modifier.padding(end = 4.dp)
                 )
-
                 Image(
                     painter = painterResource(R.drawable.ic_right_arrow),
                     contentDescription = "Right Arrow",
@@ -95,5 +92,4 @@ fun DateEndSection() {
             }
         }
     }
-
 }

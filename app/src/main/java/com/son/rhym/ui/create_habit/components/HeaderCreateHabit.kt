@@ -1,4 +1,4 @@
-package com.son.rhym.components.create_habit
+package com.son.rhym.ui.create_habit.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

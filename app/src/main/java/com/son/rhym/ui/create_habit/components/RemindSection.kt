@@ -1,4 +1,4 @@
-package com.son.rhym.components.create_habit
+package com.son.rhym.ui.create_habit.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun RemindSection(){
+fun RemindSection() {
     Column(
         verticalArrangement = Arrangement.spacedBy(8.dp),
         modifier = Modifier.padding(top = 18.dp)

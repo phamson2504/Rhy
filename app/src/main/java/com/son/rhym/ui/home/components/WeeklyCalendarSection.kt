@@ -1,4 +1,4 @@
-package com.son.rhym.components.home
+package com.son.rhym.ui.home.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -46,9 +46,8 @@ fun WeeklyCalendarSection(
         listState.animateScrollToItem(28)
     }
 
-
     LazyRow(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         state = listState,
         contentPadding = PaddingValues(horizontal = 15.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -60,7 +59,7 @@ fun WeeklyCalendarSection(
             val selected = date == selectedDate
             val isDateNow = date == LocalDate.now()
             Column(
-                modifier = modifier
+                modifier = Modifier
                     .width(60.dp)
                     .clip(
                         RoundedCornerShape(18.dp),
@@ -113,5 +112,4 @@ fun WeeklyCalendarSection(
             }
         }
     }
-
 }

@@ -1,4 +1,4 @@
-package com.son.rhym.components.create_habit
+package com.son.rhym.ui.create_habit.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -29,9 +29,9 @@ import com.son.rhym.R
 
 @Composable
 fun HabitNameSection(
-    habitName : String ,
+    habitName : String,
     onHabitNameChange: (String) -> Unit
-){
+) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(16.dp),
@@ -69,7 +69,7 @@ fun HabitNameSection(
 
             BasicTextField(
                 value = habitName,
-                onValueChange = onHabitNameChange ,
+                onValueChange = onHabitNameChange,
                 singleLine = true,
                 textStyle = TextStyle(
                     fontSize = 16.sp,
