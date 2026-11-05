@@ -1,4 +1,4 @@
-package com.son.rhym.ui.home.components
+package com.son.rhym.core.navigation
 
 import androidx.compose.material3.*
 import androidx.compose.runtime.*

@@ -19,52 +19,75 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.son.rhym.ui.create_habit.components.CreateHabitHeader
 import com.son.rhym.ui.create_habit.components.EndDateSection
+import com.son.rhym.ui.create_habit.components.GoalDialog
 import com.son.rhym.ui.create_habit.components.GoalSection
+import com.son.rhym.ui.create_habit.components.HabitDescriptionSection
 import com.son.rhym.ui.create_habit.components.HabitNameSection
 import com.son.rhym.ui.create_habit.components.ReminderSection
 import com.son.rhym.ui.create_habit.components.RepeatSection
 import com.son.rhym.ui.create_habit.components.StartDateSection
-import com.son.rhym.ui.home.components.BottomNavigationBar
 
 @Composable
 fun CreateHabitScreen(
-    modifier: Modifier = Modifier,
     onBackClick: () -> Unit
 ) {
     val scrollState = rememberScrollState()
     var habitName by remember { mutableStateOf("") }
 
+    var showGoalDialog by remember {
+        mutableStateOf(false)
+    }
+
     Surface(
-        modifier = modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
         Scaffold(
             containerColor = MaterialTheme.colorScheme.background,
-            bottomBar = {
-                BottomNavigationBar()
-            }
         ) { innerPadding ->
 
             Column(
-                modifier
-                    .fillMaxSize()
+                modifier = Modifier.fillMaxSize()
                     .padding(innerPadding)
                     .verticalScroll(scrollState)
-                    .padding(horizontal = 10.dp, vertical = 10.dp)
+                    .padding(vertical = 10.dp)
             ) {
-                CreateHabitHeader()
-
+                CreateHabitHeader(
+                    onBackClick = onBackClick,
+                    onSaveClick = {
+                    }
+                )
                 HabitNameSection(
                     habitName = habitName,
                     onHabitNameChange = { habitName = it }
                 )
-                GoalSection()
+
+                HabitDescriptionSection()
+
+                GoalSection(
+                    onClick = {
+                        showGoalDialog = true
+                    }
+                )
+
+                if (showGoalDialog) {
+                    GoalDialog(
+                        onDismiss = {
+                            showGoalDialog = false
+                        },
+                        onConfirm = { goal ->
+                            // Update goal
+                            showGoalDialog = false
+                        }
+                    )
+                }
+
                 RepeatSection()
+
                 ReminderSection()
 
-                Spacer(modifier = Modifier.height(16.dp))
-
                 StartDateSection()
+
                 EndDateSection()
 
             }

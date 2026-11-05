@@ -37,7 +37,7 @@ fun HabitNameSection(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 8.dp)
+            .padding(16.dp),
     ) {
         Box(
             modifier = Modifier
@@ -102,4 +102,9 @@ fun HabitNameSection(
             )
         }
     }
+
+    HorizontalDivider(
+        thickness = 1.dp,
+        color = MaterialTheme.colorScheme.outline
+    )
 }

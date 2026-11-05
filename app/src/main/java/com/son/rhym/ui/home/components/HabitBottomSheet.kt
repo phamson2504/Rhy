@@ -25,7 +25,9 @@ import com.son.rhym.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HabitBottomSheet(
-    onDismiss: () -> Unit
+    onDismiss: () -> Unit,
+    onHabitClick: () -> Unit,
+    onTaskClick: () -> Unit
 ) {
     ModalBottomSheet(
         onDismissRequest = onDismiss,
@@ -43,12 +45,12 @@ fun HabitBottomSheet(
             SheetItem(
                 icon = R.drawable.ic_add_habit,
                 title = "Regular habits",
-                onClick = { /* Navigate to Habit */ }
+                onClick = { onHabitClick() }
             )
             SheetItem(
                 icon = R.drawable.ic_add_task,
                 title = "One-time task",
-                onClick = { /* Navigate to Task */ }
+                onClick = { onTaskClick() }
             )
         }
     }

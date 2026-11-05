@@ -21,7 +21,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.son.rhym.model.HabitItem
 import com.son.rhym.ui.common.swipeable.SwipeActionContainer
-import com.son.rhym.ui.home.components.BottomNavigationBar
+import com.son.rhym.core.navigation.BottomNavigationBar
+import com.son.rhym.ui.create_habit.CreateHabitScreen
 import com.son.rhym.ui.home.components.DailyProgressCard
 import com.son.rhym.ui.home.components.HabitBottomSheet
 import com.son.rhym.ui.home.components.HabitsHeader
@@ -78,7 +79,11 @@ fun RhymHomeScreen(
         HabitBottomSheet(
             onDismiss = {
                 showHabitSheet = false
-            }
+            },
+            onHabitClick = {
+                onAddHabitClick()
+            },
+            onTaskClick = {}
         )
     }
 

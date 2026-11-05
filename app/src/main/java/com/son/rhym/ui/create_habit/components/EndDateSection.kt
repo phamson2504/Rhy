@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,17 +29,12 @@ import com.son.rhym.R
 @Composable
 fun EndDateSection() {
     Card(
-        shape = RoundedCornerShape(16.dp),
-        border = BorderStroke(
-            1.dp,
-            MaterialTheme.colorScheme.outline
-        ),
+        shape = RoundedCornerShape(5.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface
+            containerColor = MaterialTheme.colorScheme.background
         ),
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = 18.dp)
     ) {
         Row(
             modifier = Modifier
@@ -57,20 +53,15 @@ fun EndDateSection() {
                     contentDescription = "End Date",
                     modifier = Modifier.size(24.dp),
                     colorFilter = ColorFilter.tint(
-                        MaterialTheme.colorScheme.onBackground
+                        MaterialTheme.colorScheme.primary
                     )
                 )
 
                 Column {
                     Text(
-                        text = "End",
+                        text = "End date",
                         fontSize = 15.sp,
                         fontWeight = FontWeight.Medium
-                    )
-                    Text(
-                        text = "Keep it going",
-                        fontSize = 12.sp,
-                        color = Color.Gray
                     )
                 }
             }
@@ -95,4 +86,9 @@ fun EndDateSection() {
             }
         }
     }
+
+    HorizontalDivider(
+        thickness = 1.dp,
+        color = MaterialTheme.colorScheme.outline
+    )
 }
