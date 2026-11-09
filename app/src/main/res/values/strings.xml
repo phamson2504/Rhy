@@ -1,3 +1,37 @@
 <resources>
     <string name="app_name">Rhym</string>
+
+    <!-- Habit Creation -->
+    <string name="habit_name">HABIT NAME</string>
+    <string name="habit_name_placeholder">e.g. Morning walk</string>
+    <string name="description">Description</string>
+
+    <!-- Dialog & Sections -->
+    <string name="goal">Goal</string>
+    <string name="repeat">Repeat</string>
+    <string name="reminder">Reminder</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
+
+    <!-- Icon & Color Picker -->
+    <string name="icon_and_color">Icon &amp; Color</string>
+    <string name="select_icon">SELECT ICON</string>
+    <string name="select_color">SELECT COLOR</string>
+    <string name="pick_custom_color">Pick Custom Color Spectrum</string>
+    <string name="drag_hue_slider">Drag slider to select hue</string>
+    <string name="quick_palette">Quick Palette</string>
+
+    <!-- Common Actions -->
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="select">Select</string>
+    <string name="close">Close</string>
+
+    <!-- Tab & Dropdown -->
+    <string name="unit">UNIT</string>
+    <string name="time">TIME</string>
+    <string name="period">Period</string>
+    <string name="unit_optional">Unit (Optional)</string>
+    <string name="setting">Setting</string>
+    <string name="language">Language</string>
 </resources>

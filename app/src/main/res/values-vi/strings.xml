@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Rhym</string>
+
+    <!-- Habit Creation -->
+    <string name="habit_name">TÊN THÓI QUEN</string>
+    <string name="habit_name_placeholder">VD: Đi bộ buổi sáng</string>
+    <string name="description">Mô tả</string>
+
+    <!-- Dialog & Sections -->
+    <string name="goal">Mục tiêu</string>
+    <string name="repeat">Lặp lại</string>
+    <string name="reminder">Nhắc nhở</string>
+    <string name="start_date">Ngày bắt đầu</string>
+    <string name="end_date">Ngày kết thúc</string>
+
+    <!-- Icon & Color Picker -->
+    <string name="icon_and_color">Icon &amp; Màu sắc</string>
+    <string name="select_icon">CHỌN ICON</string>
+    <string name="select_color">CHỌN MÀU SẮC</string>
+    <string name="pick_custom_color">Chọn gam màu tùy chỉnh</string>
+    <string name="drag_hue_slider">Kéo thanh trượt để chọn màu</string>
+    <string name="quick_palette">Bảng màu nhanh</string>
+
+    <!-- Common Actions -->
+    <string name="save">Lưu</string>
+    <string name="cancel">Hủy</string>
+    <string name="select">Chọn</string>
+    <string name="close">Đóng</string>
+
+    <!-- Tab & Dropdown -->
+    <string name="unit">ĐƠN VỊ</string>
+    <string name="time">THỜI GIAN</string>
+    <string name="period">Chu kỳ</string>
+    <string name="unit_optional">Đơn vị (Tùy chọn)</string>
+    <string name="setting">Cài đặt</string>
+    <string name="language">Ngôn ngữ</string>
+</resources>

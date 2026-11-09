@@ -1,6 +1,7 @@
 package com.son.rhym.ui.create_habit.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,16 +23,20 @@ import com.son.rhym.R
 
 @Composable
 fun GoalSection(
+    amount: Int,
+    unit: String,
+    period: String,
     onClick: () -> Unit
 ) {
 
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onClick() },
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.background
         )
     ) {
-
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -47,7 +52,7 @@ fun GoalSection(
                 )
             )
             Text(
-                text = "1 time per day",
+                text = "$amount $unit per $period",
                 fontSize = 14.sp,
                 color = MaterialTheme.colorScheme.onBackground,
                 modifier = Modifier
@@ -68,6 +73,7 @@ fun GoalSection(
             }
         }
     }
+
     HorizontalDivider(
         thickness = 1.dp,
         color = MaterialTheme.colorScheme.outline

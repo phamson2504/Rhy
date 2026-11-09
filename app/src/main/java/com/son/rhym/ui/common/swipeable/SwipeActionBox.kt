@@ -55,7 +55,6 @@ fun SwipeActionButton(
     }
 
     Box(modifier.fillMaxWidth()) {
-        // Background actions, one on each side
         Row (
             Modifier.matchParentSize(),
             horizontalArrangement = Arrangement.SpaceBetween

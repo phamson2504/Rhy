@@ -1,6 +1,5 @@
 package com.son.rhym.ui.create_habit.components
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -25,9 +24,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.son.rhym.R
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 
 @Composable
-fun StartDateSection() {
+fun StartDateSection(
+    startDate: LocalDate,
+    onClick: () -> Unit
+) {
     Card(
         shape = RoundedCornerShape(5.dp),
         colors = CardDefaults.cardColors(
@@ -35,11 +40,13 @@ fun StartDateSection() {
         ),
         modifier = Modifier
             .fillMaxWidth()
+            .clickable {
+                onClick()
+            }
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable { /* Handle start date */ }
                 .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
@@ -67,7 +74,7 @@ fun StartDateSection() {
 
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
-                    text = "Today",
+                    text = startDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)),
                     fontSize = 14.sp,
                     color = Color.Gray,
                     modifier = Modifier.padding(end = 4.dp)

@@ -19,10 +19,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.son.rhym.core.navigation.BottomNavigationBar
 import com.son.rhym.model.HabitItem
 import com.son.rhym.ui.common.swipeable.SwipeActionContainer
-import com.son.rhym.core.navigation.BottomNavigationBar
-import com.son.rhym.ui.create_habit.CreateHabitScreen
 import com.son.rhym.ui.home.components.DailyProgressCard
 import com.son.rhym.ui.home.components.HabitBottomSheet
 import com.son.rhym.ui.home.components.HabitsHeader
@@ -36,7 +35,8 @@ import java.time.LocalDate
 @Composable
 fun RhymHomeScreen(
     modifier: Modifier = Modifier,
-    onAddHabitClick: () -> Unit
+    onAddHabitClick: () -> Unit,
+    onNavigateToSetting: () -> Unit = {},
 ) {
     var habits by remember {
         mutableStateOf(
@@ -94,7 +94,14 @@ fun RhymHomeScreen(
         Scaffold(
             containerColor = MaterialTheme.colorScheme.background,
             bottomBar = {
-                BottomNavigationBar()
+                BottomNavigationBar(
+                    selectedTab = 0,
+                    onTabSelected = { index ->
+                        if (index == 2) {
+                            onNavigateToSetting()
+                        }
+                    }
+                )
             }
         ) { innerPadding ->
 

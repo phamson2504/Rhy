@@ -1,7 +1,5 @@
 package com.son.rhym.ui.create_habit.components
 
-import com.son.rhym.model.GoalPeriod
-
 // "130" -> 90 giây (00:01:30)
 fun String.digitsToSeconds(): Int {
     val d = padStart(6, '0')
@@ -20,9 +18,9 @@ fun Int.secondsToDigits(): String {
 }
 
 // 90 giây -> "00:01:30"
-fun Int.formatDuration(): String {
-    val h = this / 3600
-    val m = (this % 3600) / 60
-    val s = this % 60
-    return "%02d:%02d:%02d".format(h, m, s)
-}
+//fun Int.formatDuration(): String {
+//    val h = this / 3600
+//    val m = (this % 3600) / 60
+//    val s = this % 60
+//    return "%02d:%02d:%02d".format(h, m, s)
+//}

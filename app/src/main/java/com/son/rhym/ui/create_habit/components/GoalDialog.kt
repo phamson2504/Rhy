@@ -22,15 +22,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.son.rhym.model.Goal
-import com.son.rhym.model.GoalPeriod
+import com.son.rhym.domain.model.Goal
+import com.son.rhym.ui.create_habit.GoalType
 
 @Composable
 fun GoalDialog(
-    initial: Goal = Goal(1, "times", GoalPeriod.DAY),
+    initial: Goal,
     onDismiss: () -> Unit,
     onConfirm: (Goal) -> Unit
 ) {
+    var timeUnit by remember { mutableStateOf(TimeUnitOption.MINUTE) }
     var text by remember { mutableStateOf(initial.amount.toString()) }
     var unit by remember { mutableStateOf(initial.unit) }
     var period by remember { mutableStateOf(initial.period) }
@@ -39,7 +40,7 @@ fun GoalDialog(
     val isValid = amount != null && amount > 0
 
     var selectedTab by rememberSaveable {
-        mutableIntStateOf(0)
+        mutableIntStateOf(if (initial.goalType == GoalType.DURATION) 1 else 0)
     }
 
     val tabs = listOf("UNIT", "TIME")
@@ -71,7 +72,11 @@ fun GoalDialog(
                         Tab(
                             selected = selectedTab == index,
                             onClick = {
-                                selectedTab = index
+                                if (selectedTab != index) {
+                                    selectedTab = index
+                                    text = ""
+                                    unit = ""
+                                }
                             },
                             text = {
                                 Text(
@@ -93,14 +98,14 @@ fun GoalDialog(
                         onPeriodChange = { period = it }
                     )
 
-                    1 -> {
-                        TimeTabContent(
-                            timeDigits = "",
-                            onTimeDigitsChange = { },
-                            period = period,
-                            onPeriodChange = { period = it }
-                        )
-                    }
+                    1 -> TimeTabContent(
+                        amountTime = text,
+                        onAmountTimeChange = { text = it },
+                        timeUnit = timeUnit,
+                        onTimeUnitChange = { timeUnit = it },
+                        period = period,
+                        onPeriodChange = { period = it }
+                    )
                 }
             }
         },
@@ -108,9 +113,23 @@ fun GoalDialog(
             TextButton(
                 enabled = isValid,
                 onClick = {
-                    onConfirm(
-                        Goal(amount!!, unit, period)
-                    )
+                    val currentGoalType = if (selectedTab == 0) GoalType.COUNT else GoalType.DURATION
+                    val goal = when (currentGoalType) {
+                        GoalType.COUNT -> Goal(
+                            goalType = GoalType.COUNT,
+                            amount = text.toIntOrNull() ?: 0,
+                            unit = unit,
+                            period = period
+                        )
+
+                        GoalType.DURATION -> Goal(
+                            goalType = GoalType.DURATION,
+                            amount = text.toIntOrNull() ?: 0,
+                            unit = timeUnit.label,
+                            period = period
+                        )
+                    }
+                    onConfirm(goal)
                 }
             ) {
                 Text("Lưu")
@@ -123,3 +142,5 @@ fun GoalDialog(
         }
     )
 }
+
+enum class GoalTab(val title: String) { UNIT("Unit"), TIME("Time") }

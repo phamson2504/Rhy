@@ -41,7 +41,7 @@ fun SwipeActionContainer(
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    painter = painterResource(R.drawable.ic_flag),
+                    painter = painterResource(R.drawable.ic_sort),
                     contentDescription = null,
                     tint = Color.White
                 )
