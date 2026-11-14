@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.son.rhym.data.local.dao.HabitDao
 import com.son.rhym.data.local.dao.HabitLogDao
+import com.son.rhym.data.local.dao.TaskDao
 import com.son.rhym.data.local.database.AppDatabase
 import dagger.Module
 import dagger.Provides
@@ -27,4 +28,7 @@ object DatabaseModule {
     fun provideHabitDao(db: AppDatabase): HabitDao = db.habitDao()
     @Provides
     fun provideHabitLogDao(db: AppDatabase): HabitLogDao = db.habitLogDao()
+
+    @Provides
+    fun provideTaskDao(db: AppDatabase): TaskDao = db.taskDao()
 }

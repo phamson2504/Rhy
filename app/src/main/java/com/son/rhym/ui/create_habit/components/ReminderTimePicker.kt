@@ -37,13 +37,6 @@ fun ReminderTimePicker(
             confirmButton = {
                 TextButton(
                     onClick = {
-                        val time = String.format(
-                            Locale.US,
-                            "%02d:%02d",
-                            timePickerState.hour,
-                            timePickerState.minute
-                        )
-
                         onConfirm(LocalTime.of(timePickerState.hour, timePickerState.minute))
                     }
                 ) {

@@ -2,8 +2,10 @@ package com.son.rhym.di
 
 import com.son.rhym.data.repository.HabitLogRepositoryImpl
 import com.son.rhym.data.repository.HabitRepositoryImpl
+import com.son.rhym.data.repository.TaskRepositoryImpl
 import com.son.rhym.domain.repository.HabitLogRepository
 import com.son.rhym.domain.repository.HabitRepository
+import com.son.rhym.domain.repository.TaskRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -21,4 +23,7 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindHabitLogRepository(impl: HabitLogRepositoryImpl): HabitLogRepository
+
+    @Binds
+    abstract fun bindTaskRepository(impl: TaskRepositoryImpl): TaskRepository
 }

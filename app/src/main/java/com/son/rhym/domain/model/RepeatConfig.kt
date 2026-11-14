@@ -1,6 +1,6 @@
 package com.son.rhym.domain.model
 
-import java.io.Serializable
+import androidx.compose.runtime.Immutable
 import java.time.DayOfWeek
 import java.time.format.TextStyle
 import java.util.Locale
@@ -12,15 +12,13 @@ enum class RepeatType {
     TIME_INTERVAL
 }
 
+@Immutable
 data class RepeatConfig(
     val type: RepeatType = RepeatType.EVERY_DAY,
     val weeklyDays: Set<DayOfWeek> = DayOfWeek.entries.toSet(),
     val monthlyDays: Set<Int> = emptySet(),
     val interval: Int = 1
-) : Serializable {
-    val weeklyDaysAsInts: Set<Int>
-        get() = weeklyDays.toIntSet()
-
+) {
     fun getDisplayText(): String {
         return when (type) {
             RepeatType.EVERY_DAY -> "Every day"
@@ -31,11 +29,3 @@ data class RepeatConfig(
     }
 }
 
-fun Set<DayOfWeek>.toIntSet(): Set<Int> {
-    return map { it.ordinal }.toSet()
-}
-
-fun Set<Int>.toDayOfWeekSet(): Set<DayOfWeek> {
-    val allDays = DayOfWeek.entries
-    return mapNotNull { allDays.getOrNull(it) }.toSet()
-}

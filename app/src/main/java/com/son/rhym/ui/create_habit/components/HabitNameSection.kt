@@ -85,7 +85,7 @@ fun HabitNameSection(
                         ) {
                             if (habitName.isEmpty()) {
                                 Text(
-                                    "e.g. Morning walk",
+                                    "Habit name",
                                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                                     fontSize = 16.sp
                                 )

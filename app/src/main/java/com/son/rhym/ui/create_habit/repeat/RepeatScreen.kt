@@ -11,15 +11,15 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.son.rhym.domain.model.RepeatConfig
 import com.son.rhym.domain.model.RepeatType
-import java.time.DayOfWeek
+import com.son.rhym.ui.create_habit.CreateHabitViewModel
 import com.son.rhym.ui.create_habit.repeat.components.EveryDay
 import com.son.rhym.ui.create_habit.repeat.components.Monthly
 import com.son.rhym.ui.create_habit.repeat.components.MonthlyDays
@@ -28,58 +28,68 @@ import com.son.rhym.ui.create_habit.repeat.components.TimeInterval
 import com.son.rhym.ui.create_habit.repeat.components.TimeIntervalSettings
 import com.son.rhym.ui.create_habit.repeat.components.Weekly
 import com.son.rhym.ui.create_habit.repeat.components.WeeklyDays
+import java.time.DayOfWeek
 
 @Composable
 fun RepeatScreen(
-    initialConfig: RepeatConfig? = null,
+    viewModel: CreateHabitViewModel,
     onBackClick: () -> Unit,
-    onConfirm: (RepeatConfig) -> Unit = {}
 ) {
-    var selectedOption by remember {
-        mutableStateOf(initialConfig?.type ?: RepeatType.EVERY_DAY)
-    }
-    var selectedDays by remember {
-        mutableStateOf(
-            initialConfig?.weeklyDays ?: DayOfWeek.entries.toSet()
-        )
-    }
-    var selectedMonthDays by remember {
-        mutableStateOf(initialConfig?.monthlyDays ?: emptySet())
-    }
-    var interval by remember {
-        mutableIntStateOf(initialConfig?.interval ?: 1)
+    val initialConfig = remember { viewModel.uiState.value.repeatConfig }
+
+    var currentConfig by remember  {
+        mutableStateOf(initialConfig)
     }
 
     val scrollState = rememberScrollState()
 
-    fun handleSave() {
-        val config = when (selectedOption) {
-            RepeatType.EVERY_DAY -> RepeatConfig(
-                type = RepeatType.EVERY_DAY,
+    fun handleSave(): Boolean {
+        when (currentConfig.type) {
+            RepeatType.WEEKLY -> {
+                if (currentConfig.weeklyDays.isEmpty()) {
+                    viewModel.showSnackbarMessage("Vui lòng chọn ít nhất 1 ngày trong tuần!")
+                    return false
+                }
+            }
+            RepeatType.MONTHLY -> {
+                if (currentConfig.monthlyDays.isEmpty()) {
+                    viewModel.showSnackbarMessage("Vui lòng chọn ít nhất 1 ngày trong tháng!")
+                    return false
+                }
+            }
+            RepeatType.TIME_INTERVAL -> {
+                if (currentConfig.interval < 1) {
+                    viewModel.showSnackbarMessage("Số ngày lặp phải lớn hơn 0!")
+                    return false
+                }
+            }
+            RepeatType.EVERY_DAY -> {}
+        }
+
+        val sanitizedConfig = when (currentConfig.type) {
+            RepeatType.EVERY_DAY -> currentConfig.copy(
                 weeklyDays = DayOfWeek.entries.toSet(),
                 monthlyDays = emptySet(),
                 interval = 1
             )
-            RepeatType.WEEKLY -> RepeatConfig(
-                type = RepeatType.WEEKLY,
-                weeklyDays = selectedDays,
+
+            RepeatType.WEEKLY -> currentConfig.copy(
                 monthlyDays = emptySet(),
                 interval = 1
             )
-            RepeatType.MONTHLY -> RepeatConfig(
-                type = RepeatType.MONTHLY,
+
+            RepeatType.MONTHLY -> currentConfig.copy(
                 weeklyDays = emptySet(),
-                monthlyDays = selectedMonthDays,
                 interval = 1
             )
-            RepeatType.TIME_INTERVAL -> RepeatConfig(
-                type = RepeatType.TIME_INTERVAL,
+
+            RepeatType.TIME_INTERVAL -> currentConfig.copy(
                 weeklyDays = emptySet(),
-                monthlyDays = emptySet(),
-                interval = interval
+                monthlyDays = emptySet()
             )
         }
-        onConfirm(config)
+        viewModel.onRepeatChange(sanitizedConfig)
+        return true
     }
 
     Surface(
@@ -98,29 +108,37 @@ fun RepeatScreen(
                     .padding(vertical = 10.dp)
             ) {
                 RepeatHeader(
-                    onBackClick = onBackClick,
-                    onSaveClick = { handleSave() }
+                    onBackClick = {
+                        if (handleSave()) {
+                            onBackClick()
+                        }
+                    }
                 )
 
                 EveryDay(
-                    selected = selectedOption == RepeatType.EVERY_DAY,
-                    onClick = { selectedOption = RepeatType.EVERY_DAY }
+                    selected = currentConfig.type == RepeatType.EVERY_DAY,
+                    onClick = {
+                        currentConfig = currentConfig.copy(type = RepeatType.EVERY_DAY)
+                    }
                 )
 
                 Weekly(
-                    selected = selectedOption == RepeatType.WEEKLY,
-                    onClick = { selectedOption = RepeatType.WEEKLY }
+                    selected = currentConfig.type == RepeatType.WEEKLY,
+                    onClick = {
+                        currentConfig = currentConfig.copy(type = RepeatType.WEEKLY)
+                    }
                 )
 
-                if (selectedOption == RepeatType.WEEKLY) {
+                if (currentConfig.type == RepeatType.WEEKLY) {
                     WeeklyDays(
-                        selectedDays = selectedDays,
+                        selectedDays = currentConfig.weeklyDays,
                         onDaySelected = { day ->
-                            selectedDays = if (day in selectedDays) {
-                                selectedDays - day
+                            val updatedDays = if (day in currentConfig.weeklyDays) {
+                                currentConfig.weeklyDays - day
                             } else {
-                                selectedDays + day
+                                currentConfig.weeklyDays + day
                             }
+                            currentConfig = currentConfig.copy(weeklyDays = updatedDays)
                         }
                     )
                 }
@@ -131,19 +149,22 @@ fun RepeatScreen(
                 )
 
                 Monthly(
-                    selected = selectedOption == RepeatType.MONTHLY,
-                    onClick = { selectedOption = RepeatType.MONTHLY }
+                    selected = currentConfig.type == RepeatType.MONTHLY,
+                    onClick = {
+                        currentConfig = currentConfig.copy(type = RepeatType.MONTHLY)
+                    }
                 )
 
-                if (selectedOption == RepeatType.MONTHLY) {
+                if (currentConfig.type == RepeatType.MONTHLY) {
                     MonthlyDays(
-                        selectedDays = selectedMonthDays,
+                        selectedDays = currentConfig.monthlyDays,
                         onDaySelected = { day ->
-                            selectedMonthDays = if (day in selectedMonthDays) {
-                                selectedMonthDays - day
+                            val updatedMonthDays = if (day in currentConfig.monthlyDays) {
+                                currentConfig.monthlyDays - day
                             } else {
-                                selectedMonthDays + day
+                                currentConfig.monthlyDays + day
                             }
+                            currentConfig = currentConfig.copy(monthlyDays = updatedMonthDays)
                         }
                     )
                 }
@@ -154,14 +175,18 @@ fun RepeatScreen(
                 )
 
                 TimeInterval(
-                    selected = selectedOption == RepeatType.TIME_INTERVAL,
-                    onClick = { selectedOption = RepeatType.TIME_INTERVAL }
+                    selected = currentConfig.type == RepeatType.TIME_INTERVAL,
+                    onClick = {
+                        currentConfig = currentConfig.copy(type = RepeatType.TIME_INTERVAL)
+                    }
                 )
 
-                if (selectedOption == RepeatType.TIME_INTERVAL) {
+                if (currentConfig.type == RepeatType.TIME_INTERVAL) {
                     TimeIntervalSettings(
-                        interval = interval,
-                        onIntervalChange = { interval = it }
+                        interval = currentConfig.interval,
+                        onIntervalChange = { newInterval ->
+                            currentConfig = currentConfig.copy(interval = newInterval)
+                        }
                     )
                 }
 

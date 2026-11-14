@@ -8,9 +8,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -33,63 +30,55 @@ fun StartDateSection(
     startDate: LocalDate,
     onClick: () -> Unit
 ) {
-    Card(
-        shape = RoundedCornerShape(5.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.background
-        ),
+    Row(
         modifier = Modifier
             .fillMaxWidth()
+            .padding(16.dp)
             .clickable {
                 onClick()
-            }
+            },
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                Image(
-                    painter = painterResource(R.drawable.ic_calendar),
-                    contentDescription = "Start Date",
-                    modifier = Modifier.size(24.dp),
-                    colorFilter = ColorFilter.tint(
-                        MaterialTheme.colorScheme.primary
-                    )
+            Image(
+                painter = painterResource(R.drawable.ic_calendar),
+                contentDescription = "Start Date",
+                modifier = Modifier.size(24.dp),
+                colorFilter = ColorFilter.tint(
+                    MaterialTheme.colorScheme.primary
                 )
-                Column {
-                    Text(
-                        text = "Start date",
-                        fontSize = 15.sp,
-                        fontWeight = FontWeight.Medium
-                    )
-                }
-            }
-
-            Row(verticalAlignment = Alignment.CenterVertically) {
+            )
+            Column {
                 Text(
-                    text = startDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)),
-                    fontSize = 14.sp,
-                    color = Color.Gray,
-                    modifier = Modifier.padding(end = 4.dp)
-                )
-                Image(
-                    painter = painterResource(R.drawable.ic_right_arrow),
-                    contentDescription = "Right Arrow",
-                    modifier = Modifier.size(20.dp),
-                    colorFilter = ColorFilter.tint(
-                        MaterialTheme.colorScheme.onBackground
-                    )
+                    text = "Start date",
+                    fontSize = 15.sp,
+                    fontWeight = FontWeight.Medium
                 )
             }
         }
+
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(
+                text = startDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)),
+                fontSize = 14.sp,
+                color = Color.Gray,
+                modifier = Modifier.padding(end = 4.dp)
+            )
+            Image(
+                painter = painterResource(R.drawable.ic_right_arrow),
+                contentDescription = "Right Arrow",
+                modifier = Modifier.size(20.dp),
+                colorFilter = ColorFilter.tint(
+                    MaterialTheme.colorScheme.onBackground
+                )
+            )
+        }
     }
+
     HorizontalDivider(
         thickness = 1.dp,
         color = MaterialTheme.colorScheme.outline

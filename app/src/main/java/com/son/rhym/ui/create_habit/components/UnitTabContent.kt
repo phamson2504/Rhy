@@ -14,6 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.son.rhym.R
+import com.son.rhym.core.dropdown.DropdownField
 import com.son.rhym.domain.model.GoalPeriod
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -59,10 +60,18 @@ fun UnitTabContent(
     }
 
     // Period
-    PeriodDropdown(
-        period = period,
-        onPeriodChange = onPeriodChange
+    DropdownField(
+        label = "Period",
+        options = GoalPeriod.entries,
+        selected = period,
+        optionLabel = { option ->
+            when (option) {
+                GoalPeriod.DAY -> "a day"
+                GoalPeriod.WEEK -> "a week"
+                GoalPeriod.MONTH -> "a month"
+                GoalPeriod.YEAR -> "a year"
+            }
+        },
+        onSelected = onPeriodChange
     )
-
 }
-

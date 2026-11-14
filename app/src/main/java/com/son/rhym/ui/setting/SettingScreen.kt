@@ -2,7 +2,6 @@ package com.son.rhym.ui.setting
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -28,22 +27,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.son.rhym.R
-import com.son.rhym.core.navigation.BottomNavigationBar
 import com.son.rhym.ui.setting.components.LanguageDialog
 
 @Preview
 @Composable
-fun SettingScreen(
-    onNavigateToHome: () -> Unit = {},
-) {
+fun SettingScreen() {
     var showLanguageDialog by remember {
         mutableStateOf(false)
     }
@@ -56,16 +50,6 @@ fun SettingScreen(
     ) {
         Scaffold(
             containerColor = MaterialTheme.colorScheme.background,
-            bottomBar = {
-                BottomNavigationBar(
-                    selectedTab = 2,
-                    onTabSelected = { index ->
-                        if (index == 0) {
-                            onNavigateToHome()
-                        }
-                    }
-                )
-            }
         ) { innerPadding ->
 
             Column(
@@ -95,7 +79,7 @@ fun SettingScreen(
                         .fillMaxWidth()
                         .height(60.dp)
                         .background(MaterialTheme.colorScheme.background)
-                        .clickable {  showLanguageDialog = true }
+                        .clickable { showLanguageDialog = true }
                         .padding(horizontal = 10.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {

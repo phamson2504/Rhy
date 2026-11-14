@@ -23,7 +23,6 @@ import com.son.rhym.R
 @Composable
 fun RepeatHeader(
     onBackClick: () -> Unit,
-    onSaveClick: () -> Unit = onBackClick,
 ) {
     Row(
         modifier = Modifier
@@ -45,15 +44,6 @@ fun RepeatHeader(
                 fontSize = 20.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = MaterialTheme.colorScheme.primary,
-            )
-        }
-
-        TextButton(onClick = onSaveClick) {
-            Text(
-                text = "Lưu",
-                fontSize = 16.sp,
-                fontWeight = FontWeight.SemiBold,
-                color = MaterialTheme.colorScheme.primary
             )
         }
     }

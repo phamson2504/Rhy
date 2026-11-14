@@ -19,11 +19,11 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.son.rhym.core.navigation.BottomNavigationBar
 import com.son.rhym.model.HabitItem
 import com.son.rhym.ui.common.swipeable.SwipeActionContainer
 import com.son.rhym.ui.home.components.DailyProgressCard
 import com.son.rhym.ui.home.components.HabitBottomSheet
+import com.son.rhym.ui.home.components.HabitCard
 import com.son.rhym.ui.home.components.HabitsHeader
 import com.son.rhym.ui.home.components.HeaderSection
 import com.son.rhym.ui.home.components.WeeklyCalendarSection
@@ -36,7 +36,7 @@ import java.time.LocalDate
 fun RhymHomeScreen(
     modifier: Modifier = Modifier,
     onAddHabitClick: () -> Unit,
-    onNavigateToSetting: () -> Unit = {},
+    onAddTaskClick: () -> Unit = {},
 ) {
     var habits by remember {
         mutableStateOf(
@@ -72,7 +72,7 @@ fun RhymHomeScreen(
 
     val scrollState = rememberScrollState()
     var selectedDate by rememberSaveable {
-        mutableStateOf(LocalDate.now().toString())
+        mutableStateOf(LocalDate.now())
     }
 
     if (showHabitSheet) {
@@ -83,7 +83,9 @@ fun RhymHomeScreen(
             onHabitClick = {
                 onAddHabitClick()
             },
-            onTaskClick = {}
+            onTaskClick = {
+                onAddTaskClick()
+            }
         )
     }
 
@@ -93,16 +95,6 @@ fun RhymHomeScreen(
     ) {
         Scaffold(
             containerColor = MaterialTheme.colorScheme.background,
-            bottomBar = {
-                BottomNavigationBar(
-                    selectedTab = 0,
-                    onTabSelected = { index ->
-                        if (index == 2) {
-                            onNavigateToSetting()
-                        }
-                    }
-                )
-            }
         ) { innerPadding ->
 
             Column(
@@ -112,14 +104,19 @@ fun RhymHomeScreen(
                     .verticalScroll(scrollState)
                     .padding(horizontal = 10.dp, vertical = 10.dp)
             ) {
-                HeaderSection()
+                HeaderSection(
+                    selectedDate,
+                    onDateSelected = { date ->
+                        selectedDate = date
+                    }
+                )
 
                 Spacer(modifier = Modifier.height(20.dp))
 
                 WeeklyCalendarSection(
-                    selectedDate = LocalDate.parse(selectedDate),
+                    selectedDate = selectedDate,
                     onDateSelected = { date ->
-                        selectedDate = date.toString()
+                        selectedDate = date
                     }
                 )
 
